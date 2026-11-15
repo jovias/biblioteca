@@ -7,7 +7,11 @@ class ServicoAvaliacoes:
         self.repo = repositorio
 
     def avaliar(self, isbn, nota):
+        if nota > 5:
+            raise NotaInvalida("A nota deve ser de 1 a 5")
+
         self.repo.avaliacoes.setdefault(isbn, []).append(nota)
+
 
     def media(self, isbn):
         return 0.0
