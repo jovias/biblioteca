@@ -4,6 +4,7 @@ from biblioteca.modelos import Livro, Usuario
 from biblioteca.repositorio import Repositorio
 from biblioteca.usuarios import CadastroUsuarios
 from biblioteca.usuarios import UsuarioInvalido
+from biblioteca.usuarios import UsuarioDuplicado
 
 
 def test_cadastrar_usuario_guarda_usuario():
@@ -19,4 +20,12 @@ def test_nao_cadastra_email_invalido():
     cadastro = CadastroUsuarios(Repositorio())
 
     with pytest.raises(UsuarioInvalido):
-        cadastro.cadastrar("Ana", "ana.email.com")    
+        cadastro.cadastrar("Ana", "ana.email.com")   
+
+
+def test_nao_cadastra_email_repetido():
+    cadastro = CadastroUsuarios(Repositorio())
+    cadastro.cadastrar("Ana", "ana@email.com")
+
+    with pytest.raises(UsuarioDuplicado):
+        cadastro.cadastrar("Ana Maria", "ana@email.com")

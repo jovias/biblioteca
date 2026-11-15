@@ -5,6 +5,10 @@ class UsuarioInvalido(Exception):
     pass
 
 
+class UsuarioDuplicado(Exception):
+    pass
+
+
 class CadastroUsuarios:
     def __init__(self, repo):
         self.repo = repo
