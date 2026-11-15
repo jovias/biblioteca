@@ -9,8 +9,9 @@ class ServicoAvaliacoes:
     def __init__(self, repositorio):
         self.repo = repositorio
 
+    
     def avaliar(self, isbn, nota):
-        if nota > NOTA_MAXIMA:
+        if nota > NOTA_MAXIMA or nota < 1:
             raise NotaInvalida("A nota deve ser de 1 a 5")
 
         self.repo.avaliacoes.setdefault(isbn, []).append(nota)
