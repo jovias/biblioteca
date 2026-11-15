@@ -1,4 +1,3 @@
-
 class NotaInvalida(ValueError):
     pass
 
@@ -8,7 +7,7 @@ class ServicoAvaliacoes:
         self.repo = repositorio
 
     def avaliar(self, isbn, nota):
-        pass
+        self.repo.avaliacoes[isbn] = [nota]
 
     def media(self, isbn):
         return 0.0
