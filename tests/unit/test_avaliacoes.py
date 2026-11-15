@@ -17,3 +17,12 @@ def test_nao_aceita_nota_acima_de_5():
 
     with pytest.raises(NotaInvalida, match="A nota deve ser de 1 a 5"):
         servico.avaliar("111", 6)
+
+
+def test_nao_aceita_nota_abaixo_de_1():
+    repo = Repositorio()
+    servico = ServicoAvaliacoes(repo)
+
+    with pytest.raises(NotaInvalida, match="A nota deve ser de 1 a 5"):
+        servico.avaliar("111", 0)
+
