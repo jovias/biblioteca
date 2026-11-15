@@ -7,7 +7,7 @@ class ServicoAvaliacoes:
         self.repo = repositorio
 
     def avaliar(self, isbn, nota):
-        self.repo.avaliacoes[isbn] = [nota]
+        self.repo.avaliacoes.setdefault(isbn, []).append(nota)
 
     def media(self, isbn):
         return 0.0
