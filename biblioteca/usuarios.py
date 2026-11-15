@@ -16,4 +16,7 @@ class CadastroUsuarios:
     def cadastrar(self, nome, email):
         if "@" not in email:
             raise UsuarioInvalido("E-mail inválido")
+        if email in self.repo.usuarios:
+            raise UsuarioDuplicado("E-mail já cadastrado")
         self.repo.usuarios[email] = Usuario(nome, email)
+    
