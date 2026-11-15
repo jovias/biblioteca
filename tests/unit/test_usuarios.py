@@ -40,3 +40,14 @@ def test_bloquear_usuario():
     cadastro.bloquear("ana@email.com")
 
     assert repo.usuarios["ana@email.com"].bloqueado is True    
+
+
+def test_desbloquear_usuario():
+    repo = Repositorio()
+    cadastro = CadastroUsuarios(repo)
+    cadastro.cadastrar("Ana", "ana@email.com")
+    cadastro.bloquear("ana@email.com")
+
+    cadastro.desbloquear("ana@email.com")
+
+    assert repo.usuarios["ana@email.com"].bloqueado is False
