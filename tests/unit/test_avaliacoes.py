@@ -26,3 +26,9 @@ def test_nao_aceita_nota_abaixo_de_1():
     with pytest.raises(NotaInvalida, match="A nota deve ser de 1 a 5"):
         servico.avaliar("111", 0)
 
+def test_media_sem_avaliacoes_retorna_zero():
+    repo = Repositorio()
+    servico = ServicoAvaliacoes(repo)
+
+    assert servico.media("111") == 0.0
+
