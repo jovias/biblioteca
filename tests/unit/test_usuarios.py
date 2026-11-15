@@ -29,3 +29,14 @@ def test_nao_cadastra_email_repetido():
 
     with pytest.raises(UsuarioDuplicado):
         cadastro.cadastrar("Ana Maria", "ana@email.com")
+
+
+
+def test_bloquear_usuario():
+    repo = Repositorio()
+    cadastro = CadastroUsuarios(repo)
+    cadastro.cadastrar("Ana", "ana@email.com")
+
+    cadastro.bloquear("ana@email.com")
+
+    assert repo.usuarios["ana@email.com"].bloqueado is True    

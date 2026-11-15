@@ -19,4 +19,6 @@ class CadastroUsuarios:
         if email in self.repo.usuarios:
             raise UsuarioDuplicado("E-mail já cadastrado")
         self.repo.usuarios[email] = Usuario(nome, email)
-    
+
+    def bloquear(self, email):
+        pass
