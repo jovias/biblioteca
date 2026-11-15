@@ -24,4 +24,4 @@ class CadastroUsuarios:
         self.repo.usuarios[email].bloqueado = True
 
     def desbloquear(self, email):
-        pass
+        self.repo.usuarios[email].bloqueado = False
