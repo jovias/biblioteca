@@ -2,6 +2,7 @@ class NotaInvalida(ValueError):
     pass
 
 
+NOTA_MINIMA = 1
 NOTA_MAXIMA = 5
 
 
@@ -11,7 +12,7 @@ class ServicoAvaliacoes:
 
     
     def avaliar(self, isbn, nota):
-        if nota > NOTA_MAXIMA or nota < 1:
+        if not NOTA_MINIMA <= nota <= NOTA_MAXIMA:
             raise NotaInvalida("A nota deve ser de 1 a 5")
 
         self.repo.avaliacoes.setdefault(isbn, []).append(nota)
