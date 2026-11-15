@@ -10,4 +10,6 @@ class CadastroUsuarios:
         self.repo = repo
 
     def cadastrar(self, nome, email):
+        if "@" not in email:
+            raise UsuarioInvalido("E-mail inválido")
         self.repo.usuarios[email] = Usuario(nome, email)
