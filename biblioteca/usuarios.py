@@ -25,6 +25,8 @@ class CadastroUsuarios:
         self.repo.usuarios[email] = Usuario(nome, email)
 
     def bloquear(self, email):
+        if email not in self.repo.usuarios:
+            raise UsuarioNaoEncontrado("Usuário não encontrado")
         self.repo.usuarios[email].bloqueado = True
 
     def desbloquear(self, email):
