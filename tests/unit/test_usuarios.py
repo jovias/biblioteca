@@ -5,6 +5,7 @@ from biblioteca.repositorio import Repositorio
 from biblioteca.usuarios import CadastroUsuarios
 from biblioteca.usuarios import UsuarioInvalido
 from biblioteca.usuarios import UsuarioDuplicado
+from biblioteca.usuarios import UsuarioNaoEncontrado
 
 
 def test_cadastrar_usuario_guarda_usuario():
@@ -51,3 +52,10 @@ def test_desbloquear_usuario():
     cadastro.desbloquear("ana@email.com")
 
     assert repo.usuarios["ana@email.com"].bloqueado is False
+
+
+def test_nao_bloqueia_usuario_inexistente():
+    cadastro = CadastroUsuarios(Repositorio())
+
+    with pytest.raises(UsuarioNaoEncontrado):
+        cadastro.bloquear("ninguem@email.com")

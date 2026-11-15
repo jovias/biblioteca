@@ -9,6 +9,10 @@ class UsuarioDuplicado(Exception):
     pass
 
 
+class UsuarioNaoEncontrado(Exception):
+    pass
+
+
 class CadastroUsuarios:
     def __init__(self, repo):
         self.repo = repo
