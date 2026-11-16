@@ -19,6 +19,8 @@ class ServicoMultas:
         return valor
 
     def pagar_multa(self, email):
+        if email not in self.repo.multas:
+            raise SemMultaPendente("Não há multa pendente")
         valor = self.repo.multas.pop(email)
         self.repo.usuarios[email].bloqueado = False
         return valor
