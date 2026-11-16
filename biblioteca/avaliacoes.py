@@ -17,5 +17,12 @@ class ServicoAvaliacoes:
 
         self.repo.avaliacoes.setdefault(isbn, []).append(nota)
 
+    
     def media(self, isbn):
-        return 0.0
+        notas = self.repo.avaliacoes.get(isbn, [])
+
+        if not notas:
+            return 0.0
+
+        return sum(notas) / len(notas)
+
