@@ -38,3 +38,13 @@ def test_busca_encontra_livro_pelo_titulo():
     resultado = acervo.buscar_por_titulo("Dom Casmurro")
 
     assert [livro.titulo for livro in resultado] == ["Dom Casmurro"]
+
+
+def test_busca_nao_traz_outros_titulos():
+    acervo = Acervo(Repositorio())
+    acervo.cadastrar_livro("111", "Dom Casmurro", "Machado de Assis")
+    acervo.cadastrar_livro("222", "Iracema", "José de Alencar")
+
+    resultado = acervo.buscar_por_titulo("Iracema")
+
+    assert [livro.titulo for livro in resultado] == ["Iracema"]
