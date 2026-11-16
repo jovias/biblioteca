@@ -15,4 +15,6 @@ class ServicoMultas:
         return valor
 
     def pagar_multa(self, email):
-        return self.repo.multas.pop(email)
+        valor = self.repo.multas.pop(email)
+        self.repo.usuarios[email].bloqueado = False
+        return valor
