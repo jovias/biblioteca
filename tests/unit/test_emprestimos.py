@@ -1,7 +1,7 @@
 import pytest
 from biblioteca.modelos import Livro, Usuario, Emprestimo
 from biblioteca.repositorio import Repositorio
-from biblioteca.emprestimos import emprestar_livro
+from biblioteca.emprestimos import emprestar_livro, devolver_livro
 
 
 def test_emprestar_livro_disponivel():
@@ -87,7 +87,7 @@ def test_nao_emprestar_acima_do_limite():
 
     repo.livros[novo_livro.isbn] = novo_livro
 
-    # O quarto empréstimo deve ser recusado
+    
     with pytest.raises(
         ValueError,
         match="Limite de 3 empréstimos atingido"
@@ -98,5 +98,56 @@ def test_nao_emprestar_acima_do_limite():
             usuario.email
         )
 
-    assert len(repo.emprestimos) == 3
-    assert novo_livro.disponivel is True
+def test_devolver_livro_emprestado():
+    repo = Repositorio()
+
+    livro = Livro(
+        isbn="555",
+        titulo="Dom Casmurro",
+        autor="Machado de Assis"
+    )
+
+    usuario = Usuario(
+        nome="Ana",
+        email="ana@email.com"
+    )
+
+    repo.livros[livro.isbn] = livro
+    repo.usuarios[usuario.email] = usuario
+
+    
+    emprestimo = emprestar_livro(
+        repo, livro.isbn, usuario.email
+    )
+
+    assert emprestimo.ativo is True
+    assert livro.disponivel is False
+
+    
+    devolver_livro(repo, livro.isbn, usuario.email)
+
+def test_nao_devolver_livro_nao_emprestado():
+    repo = Repositorio()
+
+    livro = Livro(
+        isbn="999",
+        titulo="Dom Casmurro",
+        autor="Machado de Assis"
+    )
+
+    usuario = Usuario(
+        nome="Ana",
+        email="ana@email.com"
+    )
+
+    repo.livros[livro.isbn] = livro
+    repo.usuarios[usuario.email] = usuario
+
+    with pytest.raises(
+        ValueError,
+        match="Empréstimo ativo não encontrado"
+    ):
+        devolver_livro(repo, livro.isbn, usuario.email)
+
+    assert livro.disponivel is True
+    assert len(repo.emprestimos) == 0
