@@ -8,4 +8,6 @@ class Acervo:
         self.repo = repo
 
     def cadastrar_livro(self, isbn, titulo, autor):
+        if not isbn:
+            raise LivroInvalido("ISBN é obrigatório")
         self.repo.livros[isbn] = Livro(isbn, titulo, autor)
