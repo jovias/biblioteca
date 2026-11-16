@@ -15,4 +15,4 @@ class ServicoMultas:
         return valor
 
     def pagar_multa(self, email):
-        pass
+        return self.repo.multas.pop(email)
