@@ -13,3 +13,6 @@ class ServicoMultas:
             self.repo.multas[email] = valor
             self.repo.usuarios[email].bloqueado = True
         return valor
+
+    def pagar_multa(self, email):
+        pass

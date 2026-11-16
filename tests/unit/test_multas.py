@@ -28,3 +28,12 @@ def test_multa_registra_debito_e_bloqueia_usuario():
 
     assert repo.multas["ana@email.com"] == 4.0
     assert repo.usuarios["ana@email.com"].bloqueado is True
+
+
+def test_pagar_multa_zera_debito():
+    repo, servico = preparar()
+    servico.calcular_multa("ana@email.com", 16)
+
+    servico.pagar_multa("ana@email.com")
+
+    assert "ana@email.com" not in repo.multas
