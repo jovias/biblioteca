@@ -24,5 +24,7 @@ class ServicoAvaliacoes:
         if not notas:
             return 0.0
 
-        return sum(notas) / len(notas)
+        total = sum(notas)
+        quantidade = len(notas)
 
+        return total / quantidade
