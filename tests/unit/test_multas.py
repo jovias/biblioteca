@@ -13,3 +13,9 @@ def test_sem_multa_dentro_do_prazo():
     repo, servico = preparar()
 
     assert servico.calcular_multa("ana@email.com", 10) == 0.0
+
+
+def test_multa_de_dois_reais_por_dia_de_atraso():
+    repo, servico = preparar()
+
+    assert servico.calcular_multa("ana@email.com", 16) == 4.0
