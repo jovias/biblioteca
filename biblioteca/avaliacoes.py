@@ -27,4 +27,4 @@ class ServicoAvaliacoes:
         total = sum(notas)
         quantidade = len(notas)
 
-        return total / quantidade
+        return round(total / quantidade, 1)
