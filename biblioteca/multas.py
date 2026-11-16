@@ -2,6 +2,10 @@ PRAZO_DIAS = 14
 VALOR_POR_DIA = 2.0
 
 
+class SemMultaPendente(Exception):
+    pass
+
+
 class ServicoMultas:
     def __init__(self, repo):
         self.repo = repo

@@ -1,3 +1,6 @@
+import pytest
+from biblioteca.multas import SemMultaPendente
+
 from biblioteca.modelos import Usuario
 from biblioteca.repositorio import Repositorio
 from biblioteca.multas import ServicoMultas
@@ -46,3 +49,10 @@ def test_pagar_multa_desbloqueia_usuario():
     servico.pagar_multa("ana@email.com")
 
     assert repo.usuarios["ana@email.com"].bloqueado is False
+
+
+def test_nao_paga_sem_multa_pendente():
+    repo, servico = preparar()
+
+    with pytest.raises(SemMultaPendente):
+        servico.pagar_multa("ana@email.com")
