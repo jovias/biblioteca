@@ -8,4 +8,8 @@ class ServicoMultas:
 
     def calcular_multa(self, email, dias_com_livro):
         dias_atraso = max(0, dias_com_livro - PRAZO_DIAS)
-        return dias_atraso * VALOR_POR_DIA
+        valor = dias_atraso * VALOR_POR_DIA
+        if valor > 0:
+            self.repo.multas[email] = valor
+            self.repo.usuarios[email].bloqueado = True
+        return valor
