@@ -19,3 +19,12 @@ def test_multa_de_dois_reais_por_dia_de_atraso():
     repo, servico = preparar()
 
     assert servico.calcular_multa("ana@email.com", 16) == 4.0
+
+
+def test_multa_registra_debito_e_bloqueia_usuario():
+    repo, servico = preparar()
+
+    servico.calcular_multa("ana@email.com", 16)
+
+    assert repo.multas["ana@email.com"] == 4.0
+    assert repo.usuarios["ana@email.com"].bloqueado is True
