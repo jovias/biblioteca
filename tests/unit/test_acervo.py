@@ -48,3 +48,12 @@ def test_busca_nao_traz_outros_titulos():
     resultado = acervo.buscar_por_titulo("Iracema")
 
     assert [livro.titulo for livro in resultado] == ["Iracema"]
+
+
+def test_busca_parcial_sem_diferenciar_maiusculas():
+    acervo = Acervo(Repositorio())
+    acervo.cadastrar_livro("111", "Dom Casmurro", "Machado de Assis")
+
+    resultado = acervo.buscar_por_titulo("casmurro")
+
+    assert [livro.titulo for livro in resultado] == ["Dom Casmurro"]
