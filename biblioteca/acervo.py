@@ -20,4 +20,4 @@ class Acervo:
         return livro
 
     def buscar_por_titulo(self, texto):
-        return []
+        return list(self.repo.livros.values())
