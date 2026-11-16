@@ -15,4 +15,6 @@ class Acervo:
             raise LivroInvalido("ISBN é obrigatório")
         if isbn in self.repo.livros:
             raise LivroDuplicado("ISBN já cadastrado")
-        self.repo.livros[isbn] = Livro(isbn, titulo, autor)
+        livro = Livro(isbn, titulo, autor)
+        self.repo.livros[isbn] = livro
+        return livro
