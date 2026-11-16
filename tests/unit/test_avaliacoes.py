@@ -41,3 +41,15 @@ def test_media_calcula_notas():
 
     assert servico.media("111") == 4.0
 
+
+def test_media_arredonda_uma_casa_decimal():
+    repo = Repositorio()
+    servico = ServicoAvaliacoes(repo)
+
+    servico.avaliar("111", 5)
+    servico.avaliar("111", 4)
+    servico.avaliar("111", 4)
+
+    assert servico.media("111") == 4.3
+
+
