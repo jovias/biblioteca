@@ -20,4 +20,8 @@ class Acervo:
         return livro
 
     def buscar_por_titulo(self, texto):
-        return [livro for livro in self.repo.livros.values() if livro.titulo == texto]
+        texto = texto.lower()
+        return [
+            livro for livro in self.repo.livros.values()
+            if texto in livro.titulo.lower()
+        ]
