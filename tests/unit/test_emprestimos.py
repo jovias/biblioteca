@@ -34,6 +34,22 @@ def test_nao_emprestar_livro_indisponivel():
         email="ana@email.com"
     )
 
+
+def test_nao_emprestar_para_usuario_bloqueado():
+    repo = Repositorio()
+
+    livro = Livro(
+        isbn="789",
+        titulo="Memórias Póstumas de Brás Cubas",
+        autor="Machado de Assis"
+    )
+
+    usuario = Usuario(
+        nome="Ana",
+        email="ana@email.com",
+        bloqueado=True
+    )
+
     repo.livros[livro.isbn] = livro
     repo.usuarios[usuario.email] = usuario
 
@@ -41,3 +57,5 @@ def test_nao_emprestar_livro_indisponivel():
         emprestar_livro(repo, livro.isbn, usuario.email)
 
     assert len(repo.emprestimos) == 0
+    assert livro.disponivel is True
+

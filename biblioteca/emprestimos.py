@@ -8,6 +8,9 @@ def emprestar_livro(repo, isbn, email):
 
     if not livro.disponivel:
         raise ValueError("Livro indisponível")
+    
+    if usuario.bloqueado:
+        raise ValueError("Usuário bloqueado")
 
     emprestimo = Emprestimo(
         livro=livro,
