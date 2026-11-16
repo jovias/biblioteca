@@ -32,3 +32,12 @@ def test_media_sem_avaliacoes_retorna_zero():
 
     assert servico.media("111") == 0.0
 
+def test_media_calcula_notas():
+    repo = Repositorio()
+    servico = ServicoAvaliacoes(repo)
+
+    servico.avaliar("111", 5)
+    servico.avaliar("111", 3)
+
+    assert servico.media("111") == 4.0
+
