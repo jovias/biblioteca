@@ -3,6 +3,9 @@ from biblioteca.modelos import Livro
 class LivroInvalido(Exception):
     pass
 
+class LivroDuplicado(Exception):
+    pass
+
 class Acervo:
     def __init__(self, repo):
         self.repo = repo

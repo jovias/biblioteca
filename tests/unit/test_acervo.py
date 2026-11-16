@@ -4,6 +4,7 @@ from biblioteca.modelos import Livro, Usuario
 from biblioteca.repositorio import Repositorio
 from biblioteca.acervo import Acervo
 from biblioteca.acervo import LivroInvalido
+from biblioteca.acervo import LivroDuplicado
 
 
 def test_cadastrar_livro_guarda_no_acervo():
@@ -20,3 +21,11 @@ def test_nao_cadastra_livro_sem_isbn():
 
     with pytest.raises(LivroInvalido):
         acervo.cadastrar_livro("", "Dom Casmurro", "Machado de Assis")
+
+
+def test_nao_cadastra_isbn_repetido():
+    acervo = Acervo(Repositorio())
+    acervo.cadastrar_livro("111", "Dom Casmurro", "Machado de Assis")
+
+    with pytest.raises(LivroDuplicado):
+        acervo.cadastrar_livro("111", "Outro livro", "Outro autor")
