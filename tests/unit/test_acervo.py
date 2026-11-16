@@ -29,3 +29,12 @@ def test_nao_cadastra_isbn_repetido():
 
     with pytest.raises(LivroDuplicado):
         acervo.cadastrar_livro("111", "Outro livro", "Outro autor")
+
+
+def test_busca_encontra_livro_pelo_titulo():
+    acervo = Acervo(Repositorio())
+    acervo.cadastrar_livro("111", "Dom Casmurro", "Machado de Assis")
+
+    resultado = acervo.buscar_por_titulo("Dom Casmurro")
+
+    assert [livro.titulo for livro in resultado] == ["Dom Casmurro"]

@@ -18,3 +18,6 @@ class Acervo:
         livro = Livro(isbn, titulo, autor)
         self.repo.livros[isbn] = livro
         return livro
+
+    def buscar_por_titulo(self, texto):
+        return []
